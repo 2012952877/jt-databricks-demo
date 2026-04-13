@@ -13,7 +13,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: 设置环境
-        run: pip install pytest pyspark pyyaml databricks-cli
+        run: pip install pytest pyspark pyyaml
+      - name: 安装最新版 Databricks CLI
+        uses: databricks/setup-cli@main
       
       # 第一关：运行所有测试（业务逻辑 + 机型校验）
       - name: 执行单元测试与合规性校验
