@@ -14,7 +14,7 @@ resources:
         - job_cluster_key: standard_cluster
           new_cluster:
             spark_version: "13.3.x-scala2.12"
-            node_type_id: "Standard_NC12s_v3" # 限制使用RI覆盖的机型
+            node_type_id: "Standard_D4s_v5" # 限制使用RI覆盖的机型
             num_workers: 1 # Demo 为了省钱，开 1 个 worker 即可
             # 如果配了 Cluster Policy，可以直接写 policy_id，例如我们使用的时区id
             # 也可以直接在这里定义 spark_conf:"spark.sql.session.timeZone": "America/Mexico_City"
