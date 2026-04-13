@@ -1,0 +1,34 @@
+# 文件路径: .github/workflows/deploy.yml
+name: JT-Databricks-Engineering-Pipeline
+
+on:
+  push:
+    branches: [ main, feature/* ] # 监听分支提交
+  pull_request:
+    branches: [ main ] # 监听 PR 合并
+
+jobs:
+  engineering-check-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: 设置环境
+        run: pip install pytest pyspark pyyaml databricks-cli
+      
+      # 第一关：运行所有测试（业务逻辑 + 机型校验）
+      - name: 执行单元测试与合规性校验
+        run: pytest tests/ 
+      
+      # 第二关：校验 DABs 配置语法
+      - name: Validate Bundle
+        run: databricks bundle validate
+        env:
+          DATABRICKS_HOST: ${{ secrets.DB_HOST }}
+
+      # 第三关：正式发布（仅当以上全绿通过时执行）
+      - name: Deploy to UAT
+        if: github.ref == 'refs/heads/main' # 只有合并到主分支才真正发版
+        run: databricks bundle deploy -t uat
+        env:
+          DATABRICKS_HOST: ${{ secrets.DB_HOST }}
+          DATABRICKS_TOKEN: ${{ secrets.DB_TOKEN }}

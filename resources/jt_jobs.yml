@@ -1,0 +1,20 @@
+# resources/jt_jobs.yml
+resources:
+  jobs:
+    jt_daily_order_job:
+      name: "[Demo] 极兔日常订单清洗作业"
+      tasks:
+        - task_key: cleanup_task
+          job_cluster_key: standard_cluster
+          spark_python_task:
+            python_file: ../src/order_cleanup.py
+      
+      # 定义作业集群：在这里限制机型，规范成本！
+      job_clusters:
+        - job_cluster_key: standard_cluster
+          new_cluster:
+            spark_version: "13.3.x-scala2.12"
+            node_type_id: "Standard_D4s_v5" # 限制使用普通机型
+            num_workers: 1 # Demo 为了省钱，开 1 个 worker 即可
+            # 如果配了 Cluster Policy，可以直接写 policy_id，例如我们使用的时区id
+            # 也可以直接在这里定义 spark_conf:"spark.sql.session.timeZone": "America/Mexico_City"

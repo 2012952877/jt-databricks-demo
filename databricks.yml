@@ -1,0 +1,16 @@
+bundle:
+  name: jt-order-processing
+
+# 告诉打包工具去读取 resources 目录下的所有 yaml 文件
+include:
+  - resources/*.yml
+
+# 定义UAT环境为部署目标
+targets:
+  uat:
+    default: true
+    workspace:
+      # UAT 环境地址
+      host: https://adb-7405606129126631.11.azuredatabricks.net
+      # Azure 资源 ID
+      azure_workspace_resource_id: /subscriptions/ad086d03-8657-4927-ad19-be21083da388/resourceGroups/jmsmxuat/providers/Microsoft.Databricks/workspaces/bigdata-databricks-mx-uat
