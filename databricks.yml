@@ -13,4 +13,4 @@ targets:
       # UAT 环境地址
       host: https://adb-7405606129126631.11.azuredatabricks.net
       # Azure 资源 ID
-      azure_workspace_resource_id: /subscriptions/ad086d03-8657-4927-ad19-be21083da388/resourceGroups/jmsmxuat/providers/Microsoft.Databricks/workspaces/bigdata-databricks-mx-uat
+      # azure_workspace_resource_id: /subscriptions/ad086d03-8657-4927-ad19-be21083da388/resourceGroups/jmsmxuat/providers/Microsoft.Databricks/workspaces/bigdata-databricks-mx-uat
