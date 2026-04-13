@@ -18,6 +18,8 @@ jobs:
       # 第一关：运行所有测试（业务逻辑 + 机型校验）
       - name: 执行单元测试与合规性校验
         run: pytest tests/ 
+        env:                         
+          PYTHONPATH: .              # 注意有个小数点
       
       # 第二关：校验 DABs 配置语法
       - name: Validate Bundle
