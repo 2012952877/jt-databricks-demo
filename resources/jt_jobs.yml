@@ -18,3 +18,8 @@ resources:
             num_workers: 1 # Demo 为了省钱，开 1 个 worker 即可
             # 如果配了 Cluster Policy，可以直接写 policy_id，例如我们使用的时区id
             # 也可以直接在这里定义 spark_conf:"spark.sql.session.timeZone": "America/Mexico_City"
+      
+      # 💡 只需要加上这几行，就能实现代码化调度
+      schedule:
+        quartz_cron_expression: "0 0 2 * * ?"
+        timezone_id: "America/Mexico_City" # 严格遵循墨西哥时间
