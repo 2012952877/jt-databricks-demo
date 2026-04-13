@@ -3,12 +3,14 @@ from pyspark.sql import SparkSession
 from pyspark.sql.functions import col, current_timestamp
 
 # 💡 工程化改造：将核心清洗逻辑单独抽成一个函数，剥离对数据的直接依赖
+
 def clean_orders(df):
     """
     清洗订单的核心逻辑：过滤空状态，打上时间戳
     """
-    clean_df = df.filter(col("status").isNotNull()) \
-                 .withColumn("processed_at", current_timestamp())
+    # ❌ 制造 BUG：假设有个粗心的程序员，直接把 .filter 这一步删掉了！
+    # 现在它根本不过滤脏数据，直接给所有数据打上了时间戳
+    clean_df = df.withColumn("processed_at", current_timestamp())
     return clean_df
 
 def main():
