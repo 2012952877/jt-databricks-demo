@@ -28,6 +28,7 @@ jobs:
         run: databricks bundle validate
         env:
           DATABRICKS_HOST: ${{ secrets.DB_HOST }}
+          DATABRICKS_TOKEN: ${{ secrets.DB_TOKEN }}
 
       # 第三关：正式发布（仅当以上全绿通过时执行）
       - name: Deploy to UAT
